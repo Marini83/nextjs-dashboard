@@ -2,6 +2,30 @@
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
+
+export type Job = {
+    _id?: any;
+    id: string;
+    title: string;
+    img: string;
+    url: string;
+    companyUrl: string;
+    date: string;
+    postedDate: Date | string;
+    company: string;
+    location: string;
+    countryCode: string;
+    countryText: string;
+    descriptionHtml: string | undefined;
+    city: string;
+    remoteOk: boolean;
+    salaryMin: number;
+    salaryMax: number;
+    salaryCurrency: string;
+    stackRequired: string[];
+  }
+
+  
 export type User = {
   id: string;
   name: string;

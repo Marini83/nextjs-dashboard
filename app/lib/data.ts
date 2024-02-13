@@ -7,10 +7,33 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  Job
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
+import fs from 'fs';
+import path from 'path';
 
+
+export async function fetchJob(): Promise<Job[]> {
+    try {
+        console.log('Fetching jobs...');
+        // Construct the absolute path to the JSON file
+        // Adjust the relative path as necessary to point to the location of your JSON file
+        const filePath = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__0.json');
+        
+        // Read the file synchronously (for simplicity; could also use fs.promises.readFile for async approach)
+        const data = fs.readFileSync(filePath, 'utf8');
+        
+        // Parse the JSON data into an array of Job objects
+        const jobs: Job[] = JSON.parse(data);
+        
+        return jobs; // Return the parsed data
+    } catch (error) {
+        console.error("Error fetching jobs:", error);
+        return []; // Return an empty array if there's an error
+    }
+}
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
