@@ -3,7 +3,7 @@
 
 import { Metadata } from 'next';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
-import {  fetchJob } from '@/app/lib/data'; // Adjust import paths as needed
+import {  fetchJobs } from '@/app/lib/data'; // Adjust import paths as needed
 import { lusitana } from '@/app/ui/fonts';
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 
 export default async function LatestJobs() { // Remove props
-    const jobs = await fetchJob();
+    const jobs = await fetchJobs();
     console.log(jobs);
     return (
             <div className="flex w-full flex-col md:col-span-4">

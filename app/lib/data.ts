@@ -15,20 +15,26 @@ import fs from 'fs';
 import path from 'path';
 
 
-export async function fetchJob(): Promise<Job[]> {
+export async function fetchJobs(): Promise<Job[]> {
     try {
         console.log('Fetching jobs...');
-        // Construct the absolute path to the JSON file
-        // Adjust the relative path as necessary to point to the location of your JSON file
-        const filePath = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__0.json');
         
-        // Read the file synchronously (for simplicity; could also use fs.promises.readFile for async approach)
-        const data = fs.readFileSync(filePath, 'utf8');
+        // Construct the absolute paths to the JSON files
+        const filePath0 = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__0.json');
+        const filePath1 = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__1.json');
         
-        // Parse the JSON data into an array of Job objects
-        const jobs: Job[] = JSON.parse(data);
+        // Read the files synchronously for simplicity
+        const data0 = fs.readFileSync(filePath0, 'utf8');
+        const data1 = fs.readFileSync(filePath1, 'utf8');
         
-        return jobs; // Return the parsed data
+        // Parse the JSON data into arrays of Job objects
+        const jobs0: Job[] = JSON.parse(data0);
+        const jobs1: Job[] = JSON.parse(data1);
+        
+        // Combine the data from the two files
+        const combinedJobs: Job[] = [...jobs0, ...jobs1];
+        
+        return combinedJobs; // Return the combined parsed data
     } catch (error) {
         console.error("Error fetching jobs:", error);
         return []; // Return an empty array if there's an error
