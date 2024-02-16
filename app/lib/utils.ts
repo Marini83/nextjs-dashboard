@@ -1,4 +1,4 @@
-import { Revenue } from './definitions';
+import { Revenue,Job, JobGrouping} from './definitions';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -21,6 +21,38 @@ export const formatDateToLocal = (
   return formatter.format(date);
 };
 
+export const extractMonthAsString = (dateString: string): string => {
+    const date = new Date(dateString);
+    return String(date.getMonth() + 1).padStart(2, '0'); // Zero-pad the month
+  };
+
+export const generateYJobAxis = (jobs: Job[], filterLocation: string, specificTitle: string): JobGrouping => {
+    const groupedJobs: JobGrouping = {};
+    console.log(jobs.length + ' jobs count');
+    jobs.forEach((job) => {
+        // Check if the job's location matches the filterLocation and title matches specificTitle before proceeding
+        if (job.location.toLowerCase().includes(filterLocation.toLowerCase()) && job.title.toLowerCase().includes(specificTitle.toLowerCase())) {
+          
+            const postedDate = new Date(job.posteddate);
+            //console.log(job.companyUrl + '   wow ' + job.company);
+            //console.log('json stringify' + JSON.stringify(job, null, 2));
+            // Format the date as "YYYY-MM" to group by month and year
+            const formattedDate = `${postedDate.getFullYear()}-${String(postedDate.getMonth() + 1).padStart(2, '0')}`;
+            //const formattedDate = postedDate.getMonth() + 1; + ' ' + postedDate.getFullYear();
+            if (!groupedJobs[formattedDate]) {
+                groupedJobs[formattedDate] = {};
+            }
+
+            // Since we're filtering by specificTitle, we know all increments are for this title
+            groupedJobs[formattedDate][specificTitle] = (groupedJobs[formattedDate][specificTitle] || 0) + 1;
+        }
+    });
+
+    return groupedJobs;
+};
+
+
+
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
   // based on highest record and in 1000s
@@ -34,6 +66,7 @@ export const generateYAxis = (revenue: Revenue[]) => {
 
   return { yAxisLabels, topLabel };
 };
+
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,

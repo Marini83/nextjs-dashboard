@@ -29,6 +29,30 @@ export function CardsSkeleton() {
   );
 }
 
+export function JobChartSkeleton() {
+    return (
+      <div className="relative w-full overflow-hidden md:col-span-4">
+        <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
+        <div className="rounded-xl bg-gray-100 p-4">
+          <div className="mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-white p-4 sm:grid-cols-13 md:gap-4">
+            {/* Generate skeleton bars for job titles */}
+            {Array.from({ length: 12 }).map((_, index) => (
+              <div key={index} className="flex flex-col items-center gap-2 col-span-1">
+                <div className="h-24 w-full max-w-xs rounded-md bg-gray-200"></div>
+                <div className="h-4 w-20 rounded-md bg-gray-200"></div>
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center pb-2 pt-6">
+            <div className="h-5 w-5 rounded-full bg-gray-200" />
+            <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+
 export function RevenueChartSkeleton() {
   return (
     <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>

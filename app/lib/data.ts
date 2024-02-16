@@ -11,8 +11,7 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
-import fs from 'fs';
-import path from 'path';
+
 
 export async function fetchJobs(): Promise<Job[]> {
     noStore();
@@ -21,7 +20,7 @@ export async function fetchJobs(): Promise<Job[]> {
       // Don't do this in production :)
   
       console.log('Fetching jobs data...');
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 7000));
   
       const data = await sql<Job>`SELECT * FROM jobs`;
   

@@ -9,23 +9,26 @@ export type Job = {
     title: string;
     img: string;
     url: string;
-    companyUrl: string;
+    companyurl: string;
     date: string;
-    postedDate: Date | string;
+    posteddate: Date | string;
     company: string;
     location: string;
-    countryCode: string;
-    countryText: string;
-    descriptionHtml: string | undefined;
+    countrycode: string;
+    countrytext: string;
+    descriptionhtml: string | undefined;
     city: string;
     remoteOk: boolean;
-    salaryMin: number;
-    salaryMax: number;
-    salaryCurrency: string;
-    stackRequired: string[];
+    salarymin: number;
+    salarymax: number;
+    salarycurrency: string;
+    stackrequired: string[];
   }
 
-  
+export type JobGrouping = {
+    [date: string]: { [title: string]: number };
+};
+
 export type User = {
   id: string;
   name: string;

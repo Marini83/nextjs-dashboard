@@ -5,10 +5,14 @@ import { Metadata } from 'next';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import {  fetchJobs } from '@/app/lib/data'; // Adjust import paths as needed
 import { lusitana } from '@/app/ui/fonts';
+import { JobChartSkeleton } from '@/app/ui/skeletons';
+import { Suspense } from 'react';
+import JobChart from '@/app/ui/jobs/job-chart';
 
 export const metadata: Metadata = {
   title: 'Job Listings',
 };
+
 
 
 export default async function LatestJobs() { // Remove props
@@ -19,6 +23,14 @@ export default async function LatestJobs() { // Remove props
               <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
                 Job Search Results
               </h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <Suspense fallback={<JobChartSkeleton />}>
+                    <JobChart />
+                    </Suspense>
+                </div>
+                <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+                  Recent Jobs
+                  </h2>
               <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
                 <div className="bg-white px-6">
                   {jobs.map((job, index) => (
