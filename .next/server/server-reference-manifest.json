@@ -1,38 +1,14 @@
 {
   "node": {
-    "a292c7dc92cde59032f559a541d472c4ebcb8bc0": {
+    "527d95f96f5ed1bd97151e366373f4e96c01b847": {
       "workers": {
-        "app/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Flib%2Factions.ts%22%2C%5B%22authenticate%22%2C%22createInvoice%22%2C%22deleteInvoice%22%2C%22updateInvoice%22%5D%5D%5D&__client_imported__=true!"
+        "app/dashboard/jobs/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Fui%2Fdashboard%2Fsidenav.tsx%22%2C%5B%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/login/page": "action-browser"
-      }
-    },
-    "bf07c2ecd45df9ded56aca5520dc7043432a9ece": {
-      "workers": {
-        "app/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Flib%2Factions.ts%22%2C%5B%22authenticate%22%2C%22createInvoice%22%2C%22deleteInvoice%22%2C%22updateInvoice%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/login/page": "action-browser"
-      }
-    },
-    "c04925fb6fcb1210eb56a0d9f792ee372c35a54c": {
-      "workers": {
-        "app/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Flib%2Factions.ts%22%2C%5B%22authenticate%22%2C%22createInvoice%22%2C%22deleteInvoice%22%2C%22updateInvoice%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/login/page": "action-browser"
-      }
-    },
-    "e4f0e6600873b54c9bd1da5ee209fb36c8f5d1a3": {
-      "workers": {
-        "app/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Flib%2Factions.ts%22%2C%5B%22authenticate%22%2C%22createInvoice%22%2C%22deleteInvoice%22%2C%22updateInvoice%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/login/page": "action-browser"
+        "app/dashboard/jobs/page": "rsc"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "4mh1vbues8k4t5kI4gfv4kGJ1NW5jQRf1L4uTeF3JAQ="
+  "encryptionKey": "fAlcyTFYH8JcPWCEcwvE0jik9825xbqkxEeiZYyOU2I="
 }

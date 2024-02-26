@@ -26,31 +26,47 @@ export const extractMonthAsString = (dateString: string): string => {
     return String(date.getMonth() + 1).padStart(2, '0'); // Zero-pad the month
   };
 
-export const generateYJobAxis = (jobs: Job[], filterLocation: string, specificTitle: string): JobGrouping => {
-    const groupedJobs: JobGrouping = {};
-    console.log(jobs.length + ' jobs count');
-    jobs.forEach((job) => {
-        // Check if the job's location matches the filterLocation and title matches specificTitle before proceeding
-        if (job.location.toLowerCase().includes(filterLocation.toLowerCase()) && job.title.toLowerCase().includes(specificTitle.toLowerCase())) {
+// export const generateYJobAxis = (jobs: Job[], filterLocation: string, specificTitle: string): JobGrouping => {
+//     const groupedJobs: JobGrouping = {};
+//     console.log(jobs.length + ' jobs count');
+//     jobs.forEach((job) => {
+//         // Check if the job's location matches the filterLocation and title matches specificTitle before proceeding
+//         if (job.location.toLowerCase().includes(filterLocation.toLowerCase()) && job.title.toLowerCase().includes(specificTitle.toLowerCase())) {
           
-            const postedDate = new Date(job.posteddate);
-            //console.log(job.companyUrl + '   wow ' + job.company);
-            //console.log('json stringify' + JSON.stringify(job, null, 2));
-            // Format the date as "YYYY-MM" to group by month and year
-            const formattedDate = `${postedDate.getFullYear()}-${String(postedDate.getMonth() + 1).padStart(2, '0')}`;
-            //const formattedDate = postedDate.getMonth() + 1; + ' ' + postedDate.getFullYear();
-            if (!groupedJobs[formattedDate]) {
-                groupedJobs[formattedDate] = {};
-            }
+//             const postedDate = new Date(job.posteddate);
+//             //console.log(job.companyUrl + '   wow ' + job.company);
+//             //console.log('json stringify' + JSON.stringify(job, null, 2));
+//             // Format the date as "YYYY-MM" to group by month and year
+//             const formattedDate = `${postedDate.getFullYear()}-${String(postedDate.getMonth() + 1).padStart(2, '0')}`;
+//             //const formattedDate = postedDate.getMonth() + 1; + ' ' + postedDate.getFullYear();
+//             if (!groupedJobs[formattedDate]) {
+//                 groupedJobs[formattedDate] = {};
+//             }
 
-            // Since we're filtering by specificTitle, we know all increments are for this title
-            groupedJobs[formattedDate][specificTitle] = (groupedJobs[formattedDate][specificTitle] || 0) + 1;
-        }
+//             // Since we're filtering by specificTitle, we know all increments are for this title
+//             groupedJobs[formattedDate][specificTitle] = (groupedJobs[formattedDate][specificTitle] || 0) + 1;
+//         }
+//     });
+
+//     return groupedJobs;
+// };
+
+export const generateJobCountByMonth = (jobs: Job[]): { [key: string]: number } => {
+    const jobCountByMonth: { [key: string]: number } = {};
+  
+    jobs.forEach((job) => {
+      const formattedDate = `${new Date(job.posteddate).getFullYear()}-${String(new Date(job.posteddate).getMonth() + 1).padStart(2, '0')}`;
+  
+      if (!jobCountByMonth[formattedDate]) {
+        jobCountByMonth[formattedDate] = 0;
+      }
+  
+      jobCountByMonth[formattedDate]++;
     });
-
-    return groupedJobs;
-};
-
+  
+    return jobCountByMonth;
+  };
+  
 
 
 export const generateYAxis = (revenue: Revenue[]) => {
