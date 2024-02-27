@@ -700,9 +700,6 @@ select {
 .pointer-events-none {
   pointer-events: none;
 }
-.fixed {
-  position: fixed;
-}
 .absolute {
   position: absolute;
 }
@@ -965,12 +962,6 @@ select {
 }
 .flex-col {
   flex-direction: column;
-}
-.flex-col-reverse {
-  flex-direction: column-reverse;
-}
-.flex-wrap {
-  flex-wrap: wrap;
 }
 .items-end {
   align-items: flex-end;
@@ -1282,9 +1273,6 @@ select {
 }
 .text-center {
   text-align: center;
-}
-.text-right {
-  text-align: right;
 }
 .align-middle {
   vertical-align: middle;

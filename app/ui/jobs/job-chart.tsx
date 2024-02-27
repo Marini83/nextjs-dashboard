@@ -3,7 +3,8 @@ import { fetchJobs } from '@/app/lib/data';
 
 export default async function JobChart() {
   const jobs = await fetchJobs();
-  const chartWidth = 700; // Assuming a wider chart for horizontal layout
+  const chartHeight = 300; // Assuming a taller chart for vertical layout
+  const barSpacing = 20; // Adjust as needed for desired spacing
 
   const jobCountByMonth = generateJobCountByMonth(jobs);
 
@@ -22,15 +23,12 @@ export default async function JobChart() {
       <h2 className="text-xl md:text-2xl mb-4">Job Distribution Over Time</h2>
 
       <div className="rounded-xl bg-gray-50 p-4">
-        <div className="flex flex-col">
+        <div className="flex items-end">
           {sortedMonths.map(([month, count]) => (
-            <div key={month} className="flex items-center gap-4">
-              <p className="text-sm text-gray-400 w-20">{month}</p>
-              <div
-                className="h-8 bg-blue-300"
-                style={{ width: `${(chartWidth / maxJobCount) * count}px` }}
-              ></div>
-              <p className="text-sm text-gray-400">{count}</p>
+            <div key={month} className="flex flex-col items-center gap-4" style={{ marginRight: `${barSpacing}px` }}>
+              <p className="text-xs text-gray-400">{count}</p>
+              <div style={{ height: `${(chartHeight / maxJobCount) * count}px`, width: '20px', background: 'blue' }}></div>
+              <p className="text-xs text-gray-400">{month}</p>
             </div>
           ))}
         </div>
