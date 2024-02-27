@@ -36,7 +36,7 @@ export default async function JobChart() { // Make component async, remove the p
                 }}
               ></div>
               <p className="-rotate-90 text-sm text-gray-400 sm:rotate-0">
-                {month}
+                {count}
               </p>
             </div>
           ))}
