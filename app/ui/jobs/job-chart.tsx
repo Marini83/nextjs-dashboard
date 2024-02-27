@@ -1,5 +1,6 @@
 import { generateJobCountByMonth } from '@/app/lib/utils'; // Adjust with your actual function import
 import { fetchJobs } from '@/app/lib/data';
+import Search from '@/app/ui/search';
 
 export default async function JobChart() {
   const jobs = await fetchJobs();
@@ -20,6 +21,9 @@ export default async function JobChart() {
 
   return (
     <div className="w-full md:col-span-4">
+        <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                <Search placeholder="Search jobs..." />
+            </div>
       <h2 className="text-xl md:text-2xl mb-4">Job Distribution Over Time</h2>
 
       <div className="rounded-xl bg-gray-50 p-4">
