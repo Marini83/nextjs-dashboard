@@ -63,7 +63,7 @@ export const generateJobCountByMonth = (jobs: Job[]): { [key: string]: number } 
   
       jobCountByMonth[formattedDate]++;
     });
-  
+    
     return jobCountByMonth;
   };
   
