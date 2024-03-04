@@ -1,6 +1,6 @@
 import { generateJobCountByMonth } from '@/app/lib/utils'; // Adjust with your actual function import
 import { fetchJobs } from '@/app/lib/data';
-import Search from '@/app/ui/search';
+import Search from '@/app/ui/jobs/search';
 
 export default async function JobChart() {
   const jobs = await fetchJobs();
