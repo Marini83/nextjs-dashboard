@@ -60,8 +60,10 @@ export type State = {
     }
   }
   
-  export async function createInvoice(prevState: State, formData: FormData) {
-    // Validate form using Zod
+  export async function createInvoice(
+    prevState: State,
+    formData: FormData,
+  ): Promise<State> {    // Validate form using Zod
     const validatedFields = CreateInvoice.safeParse({
       customerId: formData.get('customerId'),
       amount: formData.get('amount'),
