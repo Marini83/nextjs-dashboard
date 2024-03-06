@@ -15,7 +15,16 @@ export const metadata: Metadata = {
 
 
 
-export default async function LatestJobs() { // Remove props
+export default async function LatestJobs({ // Remove props
+    searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+    //const jobs = await fetchFilteredJobs(query);
     const jobs = await fetchJobs();
     console.log(jobs);
     return (
@@ -25,8 +34,8 @@ export default async function LatestJobs() { // Remove props
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 <Suspense fallback={<JobChartSkeleton />}>
-                    <JobChart />
-                    </Suspense>
+                    <JobChart query={query} />
+                </Suspense>
                 </div>
                 <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
                   Recent Jobs

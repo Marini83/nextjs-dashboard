@@ -32,31 +32,35 @@ export async function fetchJobs(): Promise<Job[]> {
       throw new Error('Failed to fetch jobs data.');
     }
 }
-// export async function fetchJobs(): Promise<Job[]> {
-//     try {
-//         console.log('Fetching jobs...');
-        
-//         // Construct the absolute paths to the JSON files
-//         const filePath0 = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__0.json');
-//         const filePath1 = path.join(process.cwd(), '../../linkedin-jobs-scraper/data/linkedin_React__1.json');
-        
-//         // Read the files synchronously for simplicity
-//         const data0 = fs.readFileSync(filePath0, 'utf8');
-//         const data1 = fs.readFileSync(filePath1, 'utf8');
-        
-//         // Parse the JSON data into arrays of Job objects
-//         const jobs0: Job[] = JSON.parse(data0);
-//         const jobs1: Job[] = JSON.parse(data1);
-        
-//         // Combine the data from the two files
-//         const combinedJobs: Job[] = [...jobs0, ...jobs1];
-        
-//         return combinedJobs; // Return the combined parsed data
-//     } catch (error) {
-//         console.error("Error fetching jobs:", error);
-//         return []; // Return an empty array if there's an error
-//     }
-// }
+
+export async function fetchFilteredJobs(query: string = ''): Promise<Job[]> {
+    noStore();
+    try {
+      // Artificially delay a response for demo purposes.
+      console.log('Fetching  filtered jobs data...');
+      await new Promise((resolve) => setTimeout(resolve, 7000));
+  
+      // Modify the SQL query to filter by title or description based on the query
+      // Use ILIKE for case-insensitive matching (specific to PostgreSQL)
+      // Adjust SQL syntax if using a different database system
+      if (query == '') {
+        const data = await sql<Job>`SELECT * FROM jobs`;
+        return data.rows;   
+      } else {
+        const data = await sql<Job>`
+        SELECT * FROM jobs
+        WHERE
+          title ILIKE ${`%${query}%`} OR
+          descriptionhtml ILIKE ${`%${query}%`}`;
+          console.log('Data filtered fetch completed...' + query);
+          return data.rows;
+      }
+    } catch (error) {
+      console.error('Database Error:', error);
+      throw new Error('Failed to fetch filtered jobs data.');
+    }
+  }
+
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).

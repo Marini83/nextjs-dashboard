@@ -1,9 +1,15 @@
 import { generateJobCountByMonth } from '@/app/lib/utils'; // Adjust with your actual function import
-import { fetchJobs } from '@/app/lib/data';
+import { fetchJobs , fetchFilteredJobs} from '@/app/lib/data';
 import Search from '@/app/ui/jobs/search';
 
-export default async function JobChart() {
-  const jobs = await fetchJobs();
+export default async function JobChart({ // Remove props
+    query,
+  }: {
+    query: string;
+  }) {
+    const jobs = await fetchFilteredJobs(query);
+    console.log(jobs);
+  //const jobs = await fetchJobs();
   const chartHeight = 300; // Assuming a taller chart for vertical layout
   const barSpacing = 20; // Adjust as needed for desired spacing
 
