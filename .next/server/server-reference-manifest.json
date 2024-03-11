@@ -2,13 +2,15 @@
   "node": {
     "effeaa1e2c6bfd6885181404fcf97108f10d9990": {
       "workers": {
-        "app/dashboard/jobs/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Fui%2Fdashboard%2Fsidenav.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!"
+        "app/dashboard/jobs/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Fui%2Fdashboard%2Fsidenav.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/(overview)/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmarin%2FDocuments%2FProjects%2FNextJS%2Fnextjs-dashboard%2Fapp%2Fui%2Fdashboard%2Fsidenav.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/jobs/page": "rsc"
+        "app/dashboard/jobs/page": "rsc",
+        "app/dashboard/(overview)/page": "rsc"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "ukPXujRd+lem1Axwv7xGgu7WbfOKcsNw8CTcl40hNjo="
+  "encryptionKey": "jtZyNiqOdq7VpMscGjsmQfw2rG/e8d+zUZkrAKqGnMo="
 }

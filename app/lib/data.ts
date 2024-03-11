@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import { QueryResult, sql } from '@vercel/postgres';
 import {
   CustomerField,
   CustomersTableType,
@@ -36,30 +36,54 @@ export async function fetchJobs(): Promise<Job[]> {
 export async function fetchFilteredJobs(query: string = ''): Promise<Job[]> {
     noStore();
     try {
-      // Artificially delay a response for demo purposes.
-      console.log('Fetching  filtered jobs data...');
+      console.log('Fetching filtered jobs data...');
       await new Promise((resolve) => setTimeout(resolve, 7000));
   
-      // Modify the SQL query to filter by title or description based on the query
-      // Use ILIKE for case-insensitive matching (specific to PostgreSQL)
-      // Adjust SQL syntax if using a different database system
-      if (query == '') {
+      if (query === '') {
         const data = await sql<Job>`SELECT * FROM jobs`;
-        return data.rows;   
+        return data.rows;
       } else {
-        const data = await sql<Job>`
-        SELECT * FROM jobs
-        WHERE
-          title ILIKE ${`%${query}%`} OR
-          descriptionhtml ILIKE ${`%${query}%`}`;
-          console.log('Data filtered fetch completed...' + query);
-          return data.rows;
-      }
+        // Split query into tokens
+        const tokens = query.split(/\s+/);
+    
+        console.log(tokens);
+    
+        let data; // Remove specific type for simplicity, adjust according to your setup
+    
+        // Based on the number of tokens, execute different queries
+        if (tokens.length === 1) {
+            data = await sql<Job>`SELECT * FROM jobs WHERE title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}`;
+        } else if (tokens.length === 2) {
+            // Adjust this query according to your actual requirements
+            data = await sql<Job>`SELECT * FROM jobs WHERE (title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}) AND (title ~* ${tokens[1]} OR location ~* ${tokens[1]} OR descriptionhtml ~* ${tokens[1]})`;
+        } else if (tokens.length === 3) {
+            // Adjust this query according to your actual requirements
+            data = await sql<Job>`SELECT * FROM jobs WHERE (title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}) AND (title ~* ${tokens[1]} OR location ~* ${tokens[1]} OR descriptionhtml ~* ${tokens[1]})
+            AND (title ~* ${tokens[2]} OR location ~* ${tokens[2]} OR descriptionhtml ~* ${tokens[2]})`;        } else if (tokens.length === 4) {
+            // Adjust this query according to your actual requirements
+            data = await sql<Job>`SELECT * FROM jobs WHERE (title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}) AND (title ~* ${tokens[1]} OR location ~* ${tokens[1]} OR descriptionhtml ~* ${tokens[1]})
+            AND (title ~* ${tokens[2]} OR location ~* ${tokens[2]} OR descriptionhtml ~* ${tokens[2]}) AND (title ~* ${tokens[3]} OR location ~* ${tokens[3]} OR descriptionhtml ~* ${tokens[3]})`;        
+        } else if (tokens.length === 5) {
+            // Adjust this query according to your actual requirements
+            data = await sql<Job>`SELECT * FROM jobs WHERE (title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}) AND (title ~* ${tokens[1]} OR location ~* ${tokens[1]} OR descriptionhtml ~* ${tokens[1]})
+            AND (title ~* ${tokens[2]} OR location ~* ${tokens[2]} OR descriptionhtml ~* ${tokens[2]}) AND (title ~* ${tokens[3]} OR location ~* ${tokens[3]} OR descriptionhtml ~* ${tokens[3]}) AND (title ~* ${tokens[4]} OR location ~* ${tokens[4]} OR descriptionhtml ~* ${tokens[4]})`;        
+        }
+        else {
+            data = await sql<Job>`SELECT * FROM jobs WHERE title ~* ${tokens[0]} OR location ~* ${tokens[0]} OR descriptionhtml ~* ${tokens[0]}`;
+        }
+        // Add more conditions as necessary for other `tokens.length` cases
+    
+        console.log('Data filtered fetch completed...', query);
+        return data ? data.rows : [];
+    }
+    
+    
+      
     } catch (error) {
       console.error('Database Error:', error);
       throw new Error('Failed to fetch filtered jobs data.');
     }
-  }
+}
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -69,7 +93,7 @@ export async function fetchRevenue() {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    console.log('Fetching revenue data...');
+    console.log('Fetching revenue data....');
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
