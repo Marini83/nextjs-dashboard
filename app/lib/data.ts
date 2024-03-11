@@ -44,7 +44,7 @@ export async function fetchFilteredJobs(query: string = ''): Promise<Job[]> {
         return data.rows;
       } else {
         // Split query into tokens
-        const tokens = query.split(/\s+/);
+        const tokens = query.split(/\s+/).map(token => token.toLowerCase());
     
         console.log(tokens);
     
